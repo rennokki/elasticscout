@@ -6,6 +6,7 @@ use Exception;
 use Laravel\Scout\Searchable as SourceSearchable;
 use Rennokki\ElasticScout\Builders\ElasticsearchBuilder;
 use Rennokki\ElasticScout\Builders\SearchQueryBuilder;
+use Rennokki\ElasticScout\Contracts\HasElasticScoutIndex;
 
 trait Searchable
 {
@@ -52,14 +53,21 @@ trait Searchable
      */
     public function getIndex()
     {
-        if (! $this->elasticScoutIndex) {
+        if (! $this instanceof HasElasticScoutIndex) {
+            throw new Exception(sprintf(
+                'The model %s does not implement the interface.',
+                __CLASS__
+            ));
+        }
+
+        if (! $this->getElasticScoutIndex()) {
             throw new Exception(sprintf(
                 'The model %s has no index set.',
                 __CLASS__
             ));
         }
 
-        return new $this->elasticScoutIndex;
+        return $this->getElasticScoutIndex();
     }
 
     /**

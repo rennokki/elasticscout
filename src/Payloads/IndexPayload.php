@@ -24,7 +24,7 @@ class IndexPayload extends RawPayload
      *
      * @var \Rennokki\ElasticScout\Index
      */
-    protected $elasticScoutIndex;
+    protected $index;
 
     /**
      * IndexPayload constructor.

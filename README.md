@@ -23,7 +23,7 @@ If your Laravel package does not support auto-discovery, add this to your `confi
 ```php
 'providers' => [
     ...
-    Rennokki\ElastiScout\ElasticScoutServiceProvider::class,
+    Rennokki\ElasticScout\ElasticScoutServiceProvider::class,
     ...
 ];
 ```
@@ -137,28 +137,33 @@ class PostIndex extends Index
 ```
 
 ### Attach the index to a model
-All the models that can be searched into should use the `Rennokki\ElasticScout\Searchable` trait:
+All the models that can be searched into should use the `Rennokki\ElasticScout\Searchable` trait and implement the `HasElasticScoutIndex` interface:
 
 ```php
+use Rennokki\ElasticScout\Contracts\HasElasticScoutIndex;
 use Rennokki\ElasticScout\Searchable;
 
-class Post extends Model
+class Post extends Model implements HasElasticScoutIndex
 {
     use Searchable;
 }
 ```
 
-Additionally, the model should also specify the index class it is using:
+Additionally, the model should also specify the index class:
 
 ```php
 use App\Indexes\PostIndex;
+use Rennokki\ElasticScout\Index;
 use Rennokki\ElasticScout\Searchable;
 
 class Post extends Model
 {
     use Searchable;
 
-    protected $index = PostIndex::class;
+    public function getElasticScoutIndex(): Index
+    {
+        return new PostIndex($this);
+    }
 }
 ```
 
