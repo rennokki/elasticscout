@@ -1,0 +1,29 @@
+<?php
+
+namespace DummyNamespace;
+
+use Rennokki\ElasticScout\Index;
+use Rennokki\ElasticScout\Migratable;
+
+class DummyClass extends Index
+{
+    use Migratable;
+
+    /**
+     * The settings applied to this index.
+     *
+     * @var array
+     */
+    protected $settings = [
+        //
+    ];
+
+    /**
+     * The mapping for this index.
+     *
+     * @var array
+     */
+    protected $mapping = [
+        //
+    ];
+}

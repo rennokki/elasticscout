@@ -1,0 +1,45 @@
+<?php
+
+namespace DummyNamespace;
+
+use Rennokki\ElasticScout\SearchRule;
+use Rennokki\ElasticScout\Builders\SearchQueryBuilder;
+
+class DummyClass extends SearchRule
+{
+    /**
+     * Initialize the rule.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //
+    }
+
+    /**
+     * Build the highlight payload.
+     *
+     * @param  SearchQueryBuilder  $builder
+     * @return array
+     */
+    public function buildHighlightPayload(SearchQueryBuilder $builder)
+    {
+        return [
+            //
+        ];
+    }
+
+    /**
+     * Build the query payload.
+     *
+     * @param  SearchQueryBuilder  $builder
+     * @return array
+     */
+    public function buildQueryPayload(SearchQueryBuilder $builder)
+    {
+        return [
+            //
+        ];
+    }
+}
