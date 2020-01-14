@@ -1,6 +1,6 @@
 ElasticScout Driver for Elasticsearch 7.1+
 ================
-This package is an initial fork from [the original package by Babenko Ivan's Elasticsearch](https://github.com/babenkoivan/scout-elasticsearch-driver). This package intends to have separate branches for each ES version and keep updating them individually.
+This package is an initial fork from [the original package by Babenko Ivan's Elasticsearch](https://github.com/babenkoivan/scout-elasticsearch-driver). This package intends to have separate branches for each ES version and keep updating them individually to maintain the LTS better.
 
 * [Install](#install)
 * [Base Usage](#base-usage)
