@@ -3,8 +3,8 @@
 namespace Rennokki\ElasticScout\Payloads;
 
 use Exception;
-use Rennokki\ElasticScout\Searchable;
 use Illuminate\Database\Eloquent\Model;
+use Rennokki\ElasticScout\Searchable;
 
 class TypePayload extends IndexPayload
 {

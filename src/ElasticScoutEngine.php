@@ -2,17 +2,17 @@
 
 namespace Rennokki\ElasticScout;
 
-use stdClass;
-use Laravel\Scout\Builder;
-use Illuminate\Support\Arr;
-use Laravel\Scout\Engines\Engine;
-use Rennokki\ElasticScout\Payloads\TypePayload;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Artisan;
-use Rennokki\ElasticScout\Facades\ElasticClient;
-use Rennokki\ElasticScout\Builders\SearchQueryBuilder;
-use Rennokki\ElasticScout\Indexers\Indexer;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Artisan;
+use Laravel\Scout\Builder;
+use Laravel\Scout\Engines\Engine;
+use Rennokki\ElasticScout\Builders\SearchQueryBuilder;
+use Rennokki\ElasticScout\Facades\ElasticClient;
+use Rennokki\ElasticScout\Indexers\Indexer;
+use Rennokki\ElasticScout\Payloads\TypePayload;
+use stdClass;
 
 class ElasticScoutEngine extends Engine
 {
@@ -139,7 +139,7 @@ class ElasticScoutEngine extends Engine
                         break;
 
                     case 'body_appends':
-                        $clauseKey = "body";
+                        $clauseKey = 'body';
 
                         foreach ($filters as $field => $value) {
                             $payload->add(
@@ -151,7 +151,7 @@ class ElasticScoutEngine extends Engine
                         break;
 
                     case 'query_appends':
-                        $clauseKey = "body.query";
+                        $clauseKey = 'body.query';
 
                         foreach ($filters as $field => $value) {
                             $payload->add(

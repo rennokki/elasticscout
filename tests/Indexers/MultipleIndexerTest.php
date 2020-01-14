@@ -2,9 +2,9 @@
 
 namespace Rennokki\ElasticScout\Tests\Indexers;
 
-use Rennokki\ElasticScout\Tests\Config;
-use Rennokki\ElasticScout\Indexers\MultipleIndexer;
 use Rennokki\ElasticScout\Facades\ElasticClient;
+use Rennokki\ElasticScout\Indexers\MultipleIndexer;
+use Rennokki\ElasticScout\Tests\Config;
 
 class MultipleIndexerTest extends AbstractIndexerTest
 {

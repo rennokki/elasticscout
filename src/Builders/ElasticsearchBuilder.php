@@ -2,9 +2,9 @@
 
 namespace Rennokki\ElasticScout\Builders;
 
-use Laravel\Scout\Builder;
-use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
+use Laravel\Scout\Builder;
 
 class ElasticsearchBuilder extends Builder
 {
@@ -164,7 +164,7 @@ class ElasticsearchBuilder extends Builder
 
     /**
      * Add a where condition.
-     * Supported operators are =, >, <, >=, <=, <>, !=
+     * Supported operators are =, >, <, >=, <=, <>, !=.
      *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html Term query
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html Range query
@@ -178,7 +178,7 @@ class ElasticsearchBuilder extends Builder
         $args = func_get_args();
 
         if (count($args) === 3) {
-            list($field, $operator, $value) = $args;
+            [$field, $operator, $value] = $args;
         } else {
             $operator = '=';
         }
@@ -453,8 +453,8 @@ class ElasticsearchBuilder extends Builder
             'geo_shape' => [
                 $field => [
                     'shape' => $shape,
-                    'relation' => $relation
-                ]
+                    'relation' => $relation,
+                ],
             ],
         ]);
     }

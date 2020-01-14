@@ -2,12 +2,12 @@
 
 namespace Rennokki\ElasticScout\Console;
 
-use LogicException;
-use Rennokki\ElasticScout\Migratable;
 use Illuminate\Console\Command;
-use Rennokki\ElasticScout\Payloads\TypePayload;
-use Rennokki\ElasticScout\Facades\ElasticClient;
+use LogicException;
 use Rennokki\ElasticScout\Console\Features\RequiresModelArgument;
+use Rennokki\ElasticScout\Facades\ElasticClient;
+use Rennokki\ElasticScout\Migratable;
+use Rennokki\ElasticScout\Payloads\TypePayload;
 
 class UpdateMappingCommand extends Command
 {
@@ -30,7 +30,7 @@ class UpdateMappingCommand extends Command
      */
     public function handle()
     {
-        if (!$model = $this->getModel()) {
+        if (! $model = $this->getModel()) {
             return;
         }
 
@@ -42,7 +42,7 @@ class UpdateMappingCommand extends Command
         }
 
         $payload = (new TypePayload($model))
-            ->set('body.' . $model->searchableAs(), $mapping)
+            ->set('body.'.$model->searchableAs(), $mapping)
             ->set('include_type_name', 'true');
 
         if (in_array(Migratable::class, class_uses_recursive($index))) {

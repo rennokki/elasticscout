@@ -2,13 +2,13 @@
 
 namespace Rennokki\ElasticScout\Tests;
 
-use stdClass;
-use Rennokki\ElasticScout\ElasticScoutEngine;
-use Rennokki\ElasticScout\Facades\ElasticClient;
 use Rennokki\ElasticScout\Builders\ElasticsearchBuilder;
 use Rennokki\ElasticScout\Builders\SearchQueryBuilder;
-use Rennokki\ElasticScout\Tests\Stubs\SearchRule;
+use Rennokki\ElasticScout\ElasticScoutEngine;
+use Rennokki\ElasticScout\Facades\ElasticClient;
 use Rennokki\ElasticScout\Tests\Dependencies\Model;
+use Rennokki\ElasticScout\Tests\Stubs\SearchRule;
+use stdClass;
 
 class ElasticScoutEngineTest extends AbstractTestCase
 {

@@ -2,9 +2,9 @@
 
 namespace Rennokki\ElasticScout\Console\Features;
 
-use Rennokki\ElasticScout\Searchable;
-use InvalidArgumentException;
 use Illuminate\Database\Eloquent\Model;
+use InvalidArgumentException;
+use Rennokki\ElasticScout\Searchable;
 use Symfony\Component\Console\Input\InputArgument;
 
 trait RequiresModelArgument

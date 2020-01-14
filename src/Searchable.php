@@ -3,10 +3,9 @@
 namespace Rennokki\ElasticScout;
 
 use Exception;
-use Illuminate\Support\Arr;
+use Laravel\Scout\Searchable as SourceSearchable;
 use Rennokki\ElasticScout\Builders\ElasticsearchBuilder;
 use Rennokki\ElasticScout\Builders\SearchQueryBuilder;
-use Laravel\Scout\Searchable as SourceSearchable;
 
 trait Searchable
 {

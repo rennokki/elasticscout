@@ -2,11 +2,11 @@
 
 namespace Rennokki\ElasticScout\Indexers;
 
+use Illuminate\Database\Eloquent\Collection;
+use Rennokki\ElasticScout\Facades\ElasticClient;
 use Rennokki\ElasticScout\Migratable;
 use Rennokki\ElasticScout\Payloads\RawPayload;
 use Rennokki\ElasticScout\Payloads\TypePayload;
-use Rennokki\ElasticScout\Facades\ElasticClient;
-use Illuminate\Database\Eloquent\Collection;
 
 class MultipleIndexer implements Indexer
 {

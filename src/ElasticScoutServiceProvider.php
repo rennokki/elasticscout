@@ -2,23 +2,23 @@
 
 namespace Rennokki\ElasticScout;
 
-use InvalidArgumentException;
-use Elasticsearch\ClientBuilder;
-use Laravel\Scout\EngineManager;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\ServiceProvider;
-use Rennokki\ElasticScout\Console\MigrateCommand;
-use Rennokki\ElasticScout\Console\MakeRuleCommand;
-use Rennokki\ElasticScout\Console\DropIndexCommand;
-use Rennokki\ElasticScout\Console\CreateIndexCommand;
-use Rennokki\ElasticScout\Console\UpdateIndexCommand;
-use Rennokki\ElasticScout\Console\UpdateMappingCommand;
-use Rennokki\ElasticScout\Console\MakeIndexCommand;
 use Aws\Credentials\Credentials;
 use Aws\Signature\SignatureV4;
+use Elasticsearch\ClientBuilder;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Uri;
 use GuzzleHttp\Ring\Future\CompletedFutureArray;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\ServiceProvider;
+use InvalidArgumentException;
+use Laravel\Scout\EngineManager;
+use Rennokki\ElasticScout\Console\CreateIndexCommand;
+use Rennokki\ElasticScout\Console\DropIndexCommand;
+use Rennokki\ElasticScout\Console\MakeIndexCommand;
+use Rennokki\ElasticScout\Console\MakeRuleCommand;
+use Rennokki\ElasticScout\Console\MigrateCommand;
+use Rennokki\ElasticScout\Console\UpdateIndexCommand;
+use Rennokki\ElasticScout\Console\UpdateMappingCommand;
 
 class ElasticScoutServiceProvider extends ServiceProvider
 {
@@ -78,7 +78,7 @@ class ElasticScoutServiceProvider extends ServiceProvider
 
                 foreach ($connection['hosts'] as $host) {
                     if (isset($host['aws_enable']) && $host['aws_enable']) {
-                        $clientBuilder->setHandler(function(array $request) use ($host) {
+                        $clientBuilder->setHandler(function (array $request) use ($host) {
                             $psr7Handler = \Aws\default_http_handler();
                             $signer = new SignatureV4('es', $host['aws_region']);
                             $request['headers']['Host'][0] = parse_url($request['headers']['Host'][0])['host'];
@@ -102,9 +102,9 @@ class ElasticScoutServiceProvider extends ServiceProvider
                             // Send the signed request to Amazon ES
                             /** @var \Psr\Http\Message\ResponseInterface $response */
                             $response = $psr7Handler($signedRequest)
-                                ->then(function(\Psr\Http\Message\ResponseInterface $response) {
+                                ->then(function (\Psr\Http\Message\ResponseInterface $response) {
                                     return $response;
-                                }, function($error) {
+                                }, function ($error) {
                                     return $error['response'];
                                 })->wait();
 
@@ -114,7 +114,7 @@ class ElasticScoutServiceProvider extends ServiceProvider
                                 'headers' => $response->getHeaders(),
                                 'body' => $response->getBody()->detach(),
                                 'transfer_stats' => ['total_time' => 0],
-                                'effective_url' => (string)$psr7Request->getUri(),
+                                'effective_url' => (string) $psr7Request->getUri(),
                             ]);
                         });
                     }

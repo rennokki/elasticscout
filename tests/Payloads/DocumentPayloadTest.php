@@ -2,8 +2,8 @@
 
 namespace Rennokki\ElasticScout\Tests\Payloads;
 
-use Rennokki\ElasticScout\Tests\AbstractTestCase;
 use Rennokki\ElasticScout\Payloads\DocumentPayload;
+use Rennokki\ElasticScout\Tests\AbstractTestCase;
 use Rennokki\ElasticScout\Tests\Dependencies\Model;
 
 class DocumentPayloadTest extends AbstractTestCase

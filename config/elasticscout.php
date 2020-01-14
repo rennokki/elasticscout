@@ -22,7 +22,7 @@ return [
     ],
 
     /**
-     * Choose the method of indexing
+     * Choose the method of indexing.
      *
      * simple: the indexing takes place one-by-one
      * multiple: the indexing is done in bulks
