@@ -63,14 +63,15 @@ trait Searchable
     }
 
     /**
-     * Get the search rules.
+     * Get the search rules. If no rules are set,
+     * use the default one that attach the query phrase.
      *
      * @return array
      */
     public function getSearchRules()
     {
         return isset($this->searchRules) && count($this->searchRules) > 0 ?
-            $this->searchRules : [SearchRule::class];
+            $this->searchRules : [new SearchRule];
     }
 
     /**
