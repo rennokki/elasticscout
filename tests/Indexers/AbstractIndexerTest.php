@@ -2,9 +2,9 @@
 
 namespace Rennokki\ElasticScout\Tests\Indexers;
 
+use Illuminate\Database\Eloquent\Collection;
 use Rennokki\ElasticScout\Tests\AbstractTestCase;
 use Rennokki\ElasticScout\Tests\Dependencies\Model;
-use Illuminate\Database\Eloquent\Collection;
 
 abstract class AbstractIndexerTest extends AbstractTestCase
 {

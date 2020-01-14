@@ -2,8 +2,8 @@
 
 namespace Rennokki\ElasticScout\Tests\Builders;
 
-use Rennokki\ElasticScout\SearchRule;
 use Rennokki\ElasticScout\Builders\SearchQueryBuilder;
+use Rennokki\ElasticScout\SearchRule;
 use Rennokki\ElasticScout\Tests\AbstractTestCase;
 use Rennokki\ElasticScout\Tests\Dependencies\Model;
 

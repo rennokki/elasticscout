@@ -3,13 +3,13 @@
 namespace Rennokki\ElasticScout\Console;
 
 use Exception;
-use Rennokki\ElasticScout\Migratable;
 use Illuminate\Console\Command;
-use Rennokki\ElasticScout\Payloads\RawPayload;
-use Rennokki\ElasticScout\Facades\ElasticClient;
-use Rennokki\ElasticScout\Payloads\IndexPayload;
-use Symfony\Component\Console\Input\InputArgument;
 use Rennokki\ElasticScout\Console\Features\RequiresModelArgument;
+use Rennokki\ElasticScout\Facades\ElasticClient;
+use Rennokki\ElasticScout\Migratable;
+use Rennokki\ElasticScout\Payloads\IndexPayload;
+use Rennokki\ElasticScout\Payloads\RawPayload;
+use Symfony\Component\Console\Input\InputArgument;
 
 class MigrateCommand extends Command
 {
@@ -51,7 +51,7 @@ class MigrateCommand extends Command
         $sourceModel = $this->getModel();
         $sourceIndex = $sourceModel->getIndex();
 
-        if (!in_array(Migratable::class, class_uses_recursive($sourceIndex))) {
+        if (! in_array(Migratable::class, class_uses_recursive($sourceIndex))) {
             $this->error(sprintf(
                 'The %s index must use the %s trait.',
                 get_class($sourceIndex),
@@ -193,7 +193,7 @@ class MigrateCommand extends Command
             ->set('index', $targetIndex)
             ->set('type', $targetType)
             ->set('include_type_name', 'true')
-            ->set('body.' . $targetType, $mapping)
+            ->set('body.'.$targetType, $mapping)
             ->get();
 
         ElasticClient::indices()

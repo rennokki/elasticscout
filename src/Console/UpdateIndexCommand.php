@@ -3,13 +3,13 @@
 namespace Rennokki\ElasticScout\Console;
 
 use Exception;
-use LogicException;
-use Rennokki\ElasticScout\Migratable;
 use Illuminate\Console\Command;
-use Rennokki\ElasticScout\Payloads\RawPayload;
-use Rennokki\ElasticScout\Facades\ElasticClient;
-use Rennokki\ElasticScout\Payloads\IndexPayload;
+use LogicException;
 use Rennokki\ElasticScout\Console\Features\RequiresIndexArgument;
+use Rennokki\ElasticScout\Facades\ElasticClient;
+use Rennokki\ElasticScout\Migratable;
+use Rennokki\ElasticScout\Payloads\IndexPayload;
+use Rennokki\ElasticScout\Payloads\RawPayload;
 
 class UpdateIndexCommand extends Command
 {
@@ -48,7 +48,7 @@ class UpdateIndexCommand extends Command
         $indexPayload = (new IndexPayload($index))->get();
         $indices = ElasticClient::indices();
 
-        if (!$indices->exists($indexPayload)) {
+        if (! $indices->exists($indexPayload)) {
             throw new LogicException(sprintf(
                 'Index %s doesn\'t exist',
                 $index->getName()
@@ -89,7 +89,7 @@ class UpdateIndexCommand extends Command
     {
         $index = $this->getIndex();
 
-        if (!in_array(Migratable::class, class_uses_recursive($index))) {
+        if (! in_array(Migratable::class, class_uses_recursive($index))) {
             return;
         }
 

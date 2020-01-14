@@ -50,7 +50,7 @@ abstract class Index
     }
 
     /**
-     * Get the mapping
+     * Get the mapping.
      *
      * @return array
      */

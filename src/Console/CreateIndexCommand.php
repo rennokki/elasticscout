@@ -2,11 +2,11 @@
 
 namespace Rennokki\ElasticScout\Console;
 
-use Rennokki\ElasticScout\Migratable;
 use Illuminate\Console\Command;
-use Rennokki\ElasticScout\Facades\ElasticClient;
-use Rennokki\ElasticScout\Payloads\IndexPayload;
 use Rennokki\ElasticScout\Console\Features\RequiresIndexArgument;
+use Rennokki\ElasticScout\Facades\ElasticClient;
+use Rennokki\ElasticScout\Migratable;
+use Rennokki\ElasticScout\Payloads\IndexPayload;
 
 class CreateIndexCommand extends Command
 {

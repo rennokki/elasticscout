@@ -2,10 +2,10 @@
 
 namespace Rennokki\ElasticScout\Indexers;
 
-use Rennokki\ElasticScout\Migratable;
-use Rennokki\ElasticScout\Facades\ElasticClient;
-use Rennokki\ElasticScout\Payloads\DocumentPayload;
 use Illuminate\Database\Eloquent\Collection;
+use Rennokki\ElasticScout\Facades\ElasticClient;
+use Rennokki\ElasticScout\Migratable;
+use Rennokki\ElasticScout\Payloads\DocumentPayload;
 
 class SimpleIndexer implements Indexer
 {

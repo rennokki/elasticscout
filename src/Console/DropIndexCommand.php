@@ -3,10 +3,10 @@
 namespace Rennokki\ElasticScout\Console;
 
 use Illuminate\Console\Command;
+use Rennokki\ElasticScout\Console\Features\RequiresIndexArgument;
 use Rennokki\ElasticScout\Facades\ElasticClient;
 use Rennokki\ElasticScout\Index;
 use Rennokki\ElasticScout\Migratable;
-use Rennokki\ElasticScout\Console\Features\RequiresIndexArgument;
 use Rennokki\ElasticScout\Payloads\RawPayload;
 
 class DropIndexCommand extends Command

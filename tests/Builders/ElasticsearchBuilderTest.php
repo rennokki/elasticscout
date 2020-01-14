@@ -6,7 +6,7 @@ use Rennokki\ElasticScout\Builders\ElasticsearchBuilder;
 use Rennokki\ElasticScout\Tests\AbstractTestCase;
 use Rennokki\ElasticScout\Tests\Dependencies\Model;
 
-class FilterBuilderTest extends AbstractTestCase
+class ElasticsearchBuilderTest extends AbstractTestCase
 {
     use Model;
 
@@ -122,7 +122,7 @@ class FilterBuilderTest extends AbstractTestCase
                 'must' => [],
                 'must_not' => [],
                 'should' => [
-                    ['term' => ['tag' => 'wow']]
+                    ['term' => ['tag' => 'wow']],
                 ],
                 'filter' => [],
                 'body_appends' => [],
@@ -558,7 +558,7 @@ class FilterBuilderTest extends AbstractTestCase
                         'geo_shape' => [
                             'foo' => [
                                 'shape' => $shape,
-                                'relation' => $relation
+                                'relation' => $relation,
                             ],
                         ],
                     ],
