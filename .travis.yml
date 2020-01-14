@@ -19,10 +19,10 @@ before_script:
   - curl -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${ES_VERSION}-amd64.deb
   - sudo dpkg -i --force-confnew elasticsearch-${ES_VERSION}-amd64.deb
   - sudo service elasticsearch restart
-  - sleep 10
-  - curl -X GET http://127.0.0.1:9200
   - travis_retry composer self-update
   - travis_retry composer update --no-interaction --prefer-source
+  - sleep 10
+  - curl -X GET http://127.0.0.1:9200
 
 script:
   - phpunit --coverage-text --coverage-clover=coverage.xml
