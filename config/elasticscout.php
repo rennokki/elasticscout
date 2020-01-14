@@ -9,9 +9,9 @@ return [
             [
                 'host' => env('SCOUT_ELASTICSEARCH_HOST', 'localhost'),
                 'port' => env('SCOUT_ELASTICSEARCH_PORT', '9200'),
-                'scheme' => env('SCOUT_ELASTICSEARCH_SCHEME', 'https'),
-                'user' => env('SCOUT_ELASTICSEARCH_USER', ''),
-                'pass' => env('SCOUT_ELASTICSEARCH_PASSWORD', ''),
+                'scheme' => env('SCOUT_ELASTICSEARCH_SCHEME', null),
+                'user' => env('SCOUT_ELASTICSEARCH_USER', null),
+                'pass' => env('SCOUT_ELASTICSEARCH_PASSWORD', null),
 
                 'aws_enable' => env('ELASTICSCOUT_AWS_ENABLED', false),
                 'aws_region' => env('ELASTICSCOUT_AWS_REGION', 'us-east-1'),
