@@ -73,25 +73,27 @@ abstract class TestCase extends Orchestra
         $app['config']->set('auth.providers.books.model', Book::class);
         $app['config']->set('app.key', 'wslxrEFGWY6GfGhvN9L3wH3KSRJQQpBD');
         $app['config']->set('scout.driver', 'elasticscout');
+        $app['config']->set('scout.queue.connection', 'sync');
         $app['config']->set('elasticscout', [
             'connection' => [
                 'hosts' => [
                     [
-                        'host' => '127.0.0.1',
-                        'port' => 9200,
-                        'scheme' => null,
-                        'user' => null,
-                        'pass' => null,
-                        'aws_enable' => false,
-                        'aws_region' => 'us-east-1',
-                        'aws_key' => '',
-                        'aws_secret' => '',
+                        'host' => env('SCOUT_ELASTICSEARCH_HOST', '127.0.0.1'),
+                        'port' => env('SCOUT_ELASTICSEARCH_PORT', 9200),
+                        'scheme' => env('SCOUT_ELASTICSEARCH_SCHEME', null),
+                        'user' => env('SCOUT_ELASTICSEARCH_USER', null),
+                        'pass' => env('SCOUT_ELASTICSEARCH_PASSWORD', null),
+
+                        'aws_enable' => env('ELASTICSCOUT_AWS_ENABLED', false),
+                        'aws_region' => env('ELASTICSCOUT_AWS_REGION', 'us-east-1'),
+                        'aws_key' => env('AWS_ACCESS_KEY_ID', ''),
+                        'aws_secret' => env('AWS_SECRET_ACCESS_KEY', ''),
                     ],
                 ],
             ],
-            'indexer' => 'simple',
-            'update_mapping_on_save' => true,
-            'refresh_document_on_save' => true,
+            'indexer' => env('SCOUT_ELASTICSEARCH_INDEXER', 'simple'),
+            'update_mapping_on_save' => env('SCOUT_ELASTICSEARCH_UPDATE_MAPPING_ON_SAVE', true),
+            'refresh_document_on_save' => env('SCOUT_ELASTICSEARCH_REFRESH_ON_SAVE', false),
         ]);
     }
 
