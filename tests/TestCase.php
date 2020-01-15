@@ -72,6 +72,7 @@ abstract class TestCase extends Orchestra
         $app['config']->set('auth.providers.posts.model', Post::class);
         $app['config']->set('auth.providers.books.model', Book::class);
         $app['config']->set('app.key', 'wslxrEFGWY6GfGhvN9L3wH3KSRJQQpBD');
+        $app['config']->set('scout.driver', 'elasticscout');
         $app['config']->set('elasticscout', [
             'connection' => [
                 'hosts' => [
