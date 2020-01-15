@@ -2,11 +2,9 @@
 
 namespace Rennokki\ElasticScout\Tests;
 
-use Rennokki\ElasticScout\Tests\Models\Book;
-use Rennokki\ElasticScout\Tests\Models\Post;
 use Rennokki\ElasticScout\Tests\Models\Restaurant;
 
-class IndexCommandsTests extends TestCase
+class IndexCommandsTest extends TestCase
 {
     public function test_sync_index_command()
     {
