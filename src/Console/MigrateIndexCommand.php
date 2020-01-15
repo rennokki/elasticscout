@@ -10,7 +10,7 @@ class MigrateIndexCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected $signature = 'elasticscout:index:delete {model}';
+    protected $signature = 'elasticscout:index:migrate {model} {name}';
 
     /**
      * {@inheritdoc}
@@ -30,7 +30,7 @@ class MigrateIndexCommand extends Command
         $currentIndex = $model->getIndex();
         $currentIndexClass = get_class($currentIndex);
 
-        $targetIndexClass = trim($this->argument('model'));
+        $targetIndexClass = trim($this->argument('index'));
         $targetIndex = new $targetIndex;
 
         if (! $currentIndex instanceof Index) {
