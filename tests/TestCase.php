@@ -72,8 +72,7 @@ abstract class TestCase extends Orchestra
         $app['config']->set('auth.providers.posts.model', Post::class);
         $app['config']->set('auth.providers.books.model', Book::class);
         $app['config']->set('app.key', 'wslxrEFGWY6GfGhvN9L3wH3KSRJQQpBD');
-        $app['config']->set('scout.driver', 'elasticscout');
-        $app['config']->set('scout.queue.connection', 'sync');
+
         $app['config']->set('elasticscout', [
             'connection' => [
                 'hosts' => [
@@ -94,6 +93,20 @@ abstract class TestCase extends Orchestra
             'indexer' => env('SCOUT_ELASTICSEARCH_INDEXER', 'simple'),
             'update_mapping_on_save' => env('SCOUT_ELASTICSEARCH_UPDATE_MAPPING_ON_SAVE', true),
             'refresh_document_on_save' => env('SCOUT_ELASTICSEARCH_REFRESH_ON_SAVE', false),
+        ]);
+
+        $app['config']->set('scout', [
+            'driver' => env('SCOUT_DRIVER', 'algolia'),
+            'prefix' => env('SCOUT_PREFIX', ''),
+            'queue' => [
+                'queue' => env('SCOUT_QUEUE', 'default'),
+                'connection' => env('SCOUT_QUEUE_CONNECTION', 'redis'),
+            ],
+            'chunk' => [
+                'searchable' => 500,
+                'unsearchable' => 500,
+            ],
+            'soft_delete' => true,
         ]);
     }
 
