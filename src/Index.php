@@ -3,14 +3,13 @@
 namespace Rennokki\ElasticScout;
 
 use Exception;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Rennokki\ElasticScout\Facades\ElasticClient;
-use Rennokki\ElasticScout\Migratable;
 use Rennokki\ElasticScout\Payloads\IndexPayload;
 use Rennokki\ElasticScout\Payloads\RawPayload;
 use Rennokki\ElasticScout\Payloads\TypePayload;
-use Illuminate\Database\Eloquent\Model;
 
 abstract class Index
 {
@@ -361,7 +360,6 @@ abstract class Index
         if (! $this->exists()) {
             $this->create();
         }
-
 
         $payload =
             $this

@@ -3,13 +3,12 @@
 namespace Rennokki\ElasticScout\Tests;
 
 use Exception;
+use Laravel\Scout\ScoutServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Rennokki\ElasticScout\ElasticScoutServiceProvider;
-use Rennokki\ElasticScout\Facades\ElasticClient;
 use Rennokki\ElasticScout\Tests\Models\Book;
 use Rennokki\ElasticScout\Tests\Models\Post;
 use Rennokki\ElasticScout\Tests\Models\Restaurant;
-use Laravel\Scout\ScoutServiceProvider;
 
 abstract class TestCase extends Orchestra
 {
