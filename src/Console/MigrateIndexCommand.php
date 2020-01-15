@@ -28,7 +28,7 @@ class MigrateIndexCommand extends Command
         $model = new $modelClass;
 
         $currentIndex = $model->getIndex();
-        $currentIndexClass = get_class($index);
+        $currentIndexClass = get_class($currentIndex);
 
         $targetIndexClass = trim($this->argument('model'));
         $targetIndex = new $targetIndex;
