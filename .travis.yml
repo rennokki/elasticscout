@@ -19,7 +19,7 @@ before_script:
   - curl -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${ES_VERSION}-linux-x86_64.tar.gz
   - tar -zxvf elasticsearch-${ES_VERSION}-linux-x86_64.tar.gz
   - ./elasticsearch-${ES_VERSION}/bin/elasticsearch -E "discovery.type=single-node" &
-  - sleep 10
+  - sleep 30
   - curl -X GET http://127.0.0.1:9200
 
 script:
