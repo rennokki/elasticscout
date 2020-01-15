@@ -72,6 +72,8 @@ class ElasticScoutServiceProvider extends ServiceProvider
                 $connection = Config::get('elasticscout.connection', []);
                 $clientBuilder = ClientBuilder::create();
 
+                $clientBuilder->setHosts($connection['hosts']);
+
                 foreach ($connection['hosts'] as $host) {
                     if (isset($host['aws_enable']) && $host['aws_enable']) {
                         $clientBuilder->setHandler(function (array $request) use ($host) {
