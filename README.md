@@ -153,13 +153,19 @@ Additionally, the model should also specify the index class:
 
 ```php
 use App\Indexes\PostIndex;
+use Rennokki\ElasticScout\Contracts\HasElasticScoutIndex;
 use Rennokki\ElasticScout\Index;
 use Rennokki\ElasticScout\Searchable;
 
-class Post extends Model
+class Post extends Model implements HasElasticScoutIndex
 {
     use Searchable;
 
+    /**
+     * Get the index instance class for Elasticsearch.
+     *
+     * @return \Rennokki\ElasticScout\Index
+     */
     public function getElasticScoutIndex(): Index
     {
         return new PostIndex($this);
