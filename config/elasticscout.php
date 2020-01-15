@@ -7,8 +7,8 @@ return [
     'connection' => [
         'hosts' => [
             [
-                'host' => env('SCOUT_ELASTICSEARCH_HOST', 'localhost'),
-                'port' => env('SCOUT_ELASTICSEARCH_PORT', '9200'),
+                'host' => env('SCOUT_ELASTICSEARCH_HOST', '127.0.0.1'),
+                'port' => env('SCOUT_ELASTICSEARCH_PORT', 9200),
                 'scheme' => env('SCOUT_ELASTICSEARCH_SCHEME', null),
                 'user' => env('SCOUT_ELASTICSEARCH_USER', null),
                 'pass' => env('SCOUT_ELASTICSEARCH_PASSWORD', null),
