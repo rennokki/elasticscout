@@ -9,6 +9,7 @@ use Rennokki\ElasticScout\Facades\ElasticClient;
 use Rennokki\ElasticScout\Tests\Models\Book;
 use Rennokki\ElasticScout\Tests\Models\Post;
 use Rennokki\ElasticScout\Tests\Models\Restaurant;
+use Laravel\Scout\ScoutServiceProvider;
 
 abstract class TestCase extends Orchestra
 {
@@ -50,6 +51,7 @@ abstract class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
+            ScoutServiceProvider::class,
             ElasticScoutServiceProvider::class,
         ];
     }
@@ -115,12 +117,17 @@ abstract class TestCase extends Orchestra
      *
      * @return void
      */
-    protected function resetDatabase()
+    protected function resetDatabase(): void
     {
         file_put_contents(__DIR__.'/database.sqlite', null);
     }
 
-    protected function resetCluster()
+    /**
+     * Delete the elasticsearch cluster indexes.
+     *
+     * @return void
+     */
+    protected function resetCluster(): void
     {
         foreach (self::$models as $model) {
             try {

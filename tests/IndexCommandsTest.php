@@ -10,7 +10,7 @@ class IndexCommandsTests extends TestCase
 {
     public function test_sync_index_command()
     {
-        $restaurant = factory(Restaurant::class)->create();
+        $restaurant = factory(Restaurant::class)->make();
         $index = $restaurant->getIndex();
 
         $this->assertFalse($index->exists());

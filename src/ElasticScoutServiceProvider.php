@@ -31,15 +31,6 @@ class ElasticScoutServiceProvider extends ServiceProvider
             __DIR__.'/../config/elasticscout.php' => config_path('elasticscout.php'),
         ]);
 
-        $this->commands([
-            SyncIndexCommand::class,
-            DeleteIndexCommand::class,
-            MigrateIndexCommand::class,
-
-            MakeIndexCommand::class,
-            MakeRuleCommand::class,
-        ]);
-
         $this
             ->app
             ->make(EngineManager::class)
@@ -57,6 +48,15 @@ class ElasticScoutServiceProvider extends ServiceProvider
 
                 return new ElasticScoutEngine(new $indexerClass(), $updateMapping);
             });
+
+        $this->commands([
+            SyncIndexCommand::class,
+            DeleteIndexCommand::class,
+            MigrateIndexCommand::class,
+
+            MakeIndexCommand::class,
+            MakeRuleCommand::class,
+        ]);
     }
 
     /**
