@@ -21,7 +21,7 @@ before_script:
   - sudo service elasticsearch restart
   - travis_retry composer self-update
   - travis_retry composer update --no-interaction --prefer-source
-  - sleep 10
+  - sleep 15
   - curl -X GET http://127.0.0.1:9200
 
 script:
