@@ -16,12 +16,10 @@ cache:
     - $HOME/.composer/cache
 
 before_script:
-  - curl -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${ES_VERSION}-amd64.deb
-  - sudo dpkg -i --force-confnew elasticsearch-${ES_VERSION}-amd64.deb
-  - sudo service elasticsearch restart
-  - travis_retry composer self-update
-  - travis_retry composer update --no-interaction --prefer-source
-  - sleep 15
+  - curl -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${ES_VERSION}-linux-x86_64.tar.gz
+  - tar -zxvf elasticsearch-${ES_VERSION}-linux-x86_64.tar.gz
+  - ./elasticsearch-${ES_VERSION}-linux-x86_64/elasticsearch -E "discovery.type=single-node" &
+  - sleep 10
   - curl -X GET http://127.0.0.1:9200
 
 script:
