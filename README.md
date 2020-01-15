@@ -52,10 +52,10 @@ Indexes
 In Elasticsearch, the Index is the equivalent of a table in MySQL, or a collection in MongoDB. You can create an index class using artisan:
 
 ```bash
-$ php artisan make:elasticscout:index Indexes/PostIndex
+$ php artisan make:elasticscout:index PostIndex
 ```
 
-You will have something like this:
+You will have something like this in `app/Indexes/PostIndex.php`:
 
 ```php
 <?php
@@ -183,6 +183,14 @@ $ php artisan elasticscout:index:sync App\\Post
 Now, each time your model creates,updates or deletes new records, they will be automatically synced to Elasticsearch.
 
 **In case you want to import already-existing data, please use the [scout:import command](https://laravel.com/docs/5.8/scout#batch-import) that is described in the Scout documentation.**
+
+Syncing the index can also be done within your code:
+
+```php
+$restaurant = Restaurant::first();
+
+$restaurant->getIndex()->sync(); // returns true/false
+```
 
 Search Query
 -----
