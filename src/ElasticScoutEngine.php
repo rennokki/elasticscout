@@ -66,7 +66,7 @@ class ElasticScoutEngine extends Engine
                 }
 
                 Artisan::call(
-                    'elasticscout:mapping:update',
+                    'elasticscout:index:sync',
                     ['model' => $modelClass]
                 );
 

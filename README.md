@@ -174,10 +174,10 @@ class Post extends Model implements HasElasticScoutIndex
 ```
 
 ### Publish the index to Elasticsearch
-To publish the index to Elasticsearch, you should update the mapping of the model that has the index set:
+To publish the index to Elasticsearch, you should sync the index:
 
 ```bash
-$ php artisan elasticscout:mapping:update App\\Post
+$ php artisan elasticscout:index:sync App\\Post
 ```
 
 Now, each time your model creates,updates or deletes new records, they will be automatically synced to Elasticsearch.
