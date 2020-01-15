@@ -5,7 +5,7 @@ namespace Rennokki\ElasticScout\Console;
 use Illuminate\Console\Command;
 use Rennokki\ElasticScout\Index;
 
-class DeleteIndexCommand extends Command
+class MigrateIndexCommand extends Command
 {
     /**
      * {@inheritdoc}
