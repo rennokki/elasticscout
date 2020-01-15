@@ -2,6 +2,8 @@
 
 namespace Rennokki\ElasticScout;
 
+use Exception;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Rennokki\ElasticScout\Facades\ElasticClient;
 use Rennokki\ElasticScout\Migratable;
@@ -59,19 +61,21 @@ abstract class Index
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
+        $prefix = config('scout.prefix');
         $name = $this->name ?? Str::snake(str_replace('Index', '', class_basename($this)));
 
-        return config('scout.prefix').$name;
+        return $prefix.$name;
     }
 
     /**
      * Get th name, resolved from the cluster.
+     * If it is not migratable, it returns the name.
      *
      * @return string
      */
-    public function getResolvedName()
+    public function getAliasName(): string
     {
         if (! $this->isMigratable()) {
             return $this->getName();
@@ -88,7 +92,7 @@ abstract class Index
      *
      * @return array
      */
-    public function getSettings()
+    public function getSettings(): array
     {
         return $this->settings;
     }
@@ -100,7 +104,18 @@ abstract class Index
      */
     public function getMapping()
     {
-        return $this->mapping;
+        $mapping = $this->mapping;
+
+        if ($this->model::usesSoftDelete() && config('scout.soft_delete', false)) {
+            Arr::set($mapping, 'properties.__soft_deleted', ['type' => 'integer']);
+        }
+
+        // Set additional data for the index
+        Arr::set($mapping, '_meta', [
+            'model' => get_class($this->model),
+        ]);
+
+        return $mapping;
     }
 
     /**
@@ -168,7 +183,7 @@ abstract class Index
      *
      * @return bool
      */
-    public function aliasExists(): bool
+    public function hasAlias(): bool
     {
         if (! $this->isMigratable()) {
             return false;
@@ -176,6 +191,24 @@ abstract class Index
 
         return ElasticClient::indices()
             ->existsAlias($this->getPayload(true));
+    }
+
+    /**
+     * Get the synced mappings from the cluster.
+     *
+     * @return array
+     */
+    public function getMappingFromCluster(): array
+    {
+        if (! $this->exists()) {
+            return [];
+        }
+
+        $mappings =
+            ElasticClient::indices()
+                ->getMapping($this->getPayload());
+
+        return $mappings[$this->getName()]['mappings'] ?? [];
     }
 
     /**
@@ -234,12 +267,12 @@ abstract class Index
      */
     public function delete(): bool
     {
-        if (! $this->exists() && ! $this->aliasExists()) {
+        if (! $this->exists() && ! $this->hasAlias()) {
             return true;
         }
 
         $payload = (new RawPayload)
-            ->set('index', $this->getResolvedName())
+            ->set('index', $this->getAliasName())
             ->get();
 
         ElasticClient::indices()
@@ -265,7 +298,7 @@ abstract class Index
         try {
             $indices->close($payload);
 
-            // Sync
+            // Sync settings
             if ($settings = $this->getSettings()) {
                 $indices->putSettings(
                     $this
@@ -275,6 +308,9 @@ abstract class Index
 
                 );
             }
+
+            // Sync Mapping
+            $this->syncMapping();
 
             $indices->open($payload);
         } catch (Exception $e) {
@@ -297,7 +333,7 @@ abstract class Index
      */
     public function syncAlias(): bool
     {
-        if (! $this->aliasExists()) {
+        if (! $this->hasAlias()) {
             return $this->createAlias();
         }
 
@@ -318,13 +354,14 @@ abstract class Index
      */
     public function syncMapping(): bool
     {
-        if (empty($this->getMapping())) {
+        if (! $this->getMapping()) {
             return false;
         }
 
         if (! $this->exists()) {
             $this->create();
         }
+
 
         $payload =
             $this

@@ -2,6 +2,7 @@
 
 namespace Rennokki\ElasticScout\Tests;
 
+use Exception;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Rennokki\ElasticScout\ElasticScoutServiceProvider;
 use Rennokki\ElasticScout\Facades\ElasticClient;
@@ -106,7 +107,11 @@ abstract class TestCase extends Orchestra
     protected function resetCluster()
     {
         foreach (self::$models as $model) {
-            (new $model)->getIndex()->delete();
+            try {
+                (new $model)->getIndex()->delete();
+            } catch (Exception $e) {
+                //
+            }
         }
     }
 }

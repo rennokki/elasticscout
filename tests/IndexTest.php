@@ -9,79 +9,79 @@ class IndexTest extends TestCase
 {
     public function test_create_index()
     {
-        $post = factory(Post::class)->create();
-        $index = $post->getIndex();
+        $restaurant = factory(Restaurant::class)->create();
+        $index = $restaurant->getIndex();
 
         $this->assertFalse($index->exists());
-        $this->assertFalse($index->aliasExists());
+        $this->assertFalse($index->hasAlias());
 
         $this->assertTrue($index->create());
 
         $this->assertTrue($index->exists());
-        $this->assertTrue($index->aliasExists());
+        $this->assertTrue($index->hasAlias());
     }
 
     public function test_create_only_alias_index()
     {
-        $post = factory(Post::class)->create();
-        $index = $post->getIndex();
+        $restaurant = factory(Restaurant::class)->create();
+        $index = $restaurant->getIndex();
 
         $this->assertFalse($index->exists());
-        $this->assertFalse($index->aliasExists());
+        $this->assertFalse($index->hasAlias());
 
         $this->assertTrue($index->createAlias());
 
         $this->assertTrue($index->exists());
-        $this->assertTrue($index->aliasExists());
+        $this->assertTrue($index->hasAlias());
     }
 
     public function test_delete_index()
     {
-        $post = factory(Post::class)->create();
-        $index = $post->getIndex();
+        $restaurant = factory(Restaurant::class)->create();
+        $index = $restaurant->getIndex();
 
         $this->assertTrue($index->create());
 
         $this->assertTrue($index->exists());
-        $this->assertTrue($index->aliasExists());
+        $this->assertTrue($index->hasAlias());
 
         $this->assertTrue($index->delete());
 
         $this->assertFalse($index->exists());
-        $this->assertFalse($index->aliasExists());
+        $this->assertFalse($index->hasAlias());
     }
 
     public function test_sync_on_new_index()
     {
-        $post = factory(Post::class)->create();
-        $index = $post->getIndex();
+        $restaurant = factory(Restaurant::class)->create();
+        $index = $restaurant->getIndex();
 
         $this->assertFalse($index->exists());
-        $this->assertFalse($index->aliasExists());
+        $this->assertFalse($index->hasAlias());
 
         $this->assertTrue($index->create());
 
         $this->assertTrue($index->exists());
-        $this->assertTrue($index->aliasExists());
+        $this->assertTrue($index->hasAlias());
 
         $this->assertTrue($index->sync());
 
         $this->assertTrue($index->exists());
-        $this->assertTrue($index->aliasExists());
+        $this->assertTrue($index->hasAlias());
     }
 
     public function test_sync_without_existence()
     {
-        $post = factory(Post::class)->create();
-        $index = $post->getIndex();
+        $restaurant = factory(Restaurant::class)->create();
+        $index = $restaurant->getIndex();
 
         $this->assertFalse($index->exists());
-        $this->assertFalse($index->aliasExists());
+        $this->assertFalse($index->hasAlias());
 
         $this->assertTrue($index->sync());
 
         $this->assertTrue($index->exists());
-        $this->assertTrue($index->aliasExists());
+        $this->assertTrue($index->hasAlias());
     }
 
     public function test_sync_mapping_without_mapping()
@@ -90,25 +90,25 @@ class IndexTest extends TestCase
         $index = $post->getIndex();
 
         $this->assertFalse($index->exists());
-        $this->assertFalse($index->aliasExists());
-
-        $this->assertFalse($index->syncMapping());
-
-        $this->assertFalse($index->exists());
-        $this->assertFalse($index->aliasExists());
-    }
-
-    public function test_sync_mapping_with_mapping()
-    {
-        $post = factory(Restaurant::class)->create();
-        $index = $post->getIndex();
-
-        $this->assertFalse($index->exists());
-        $this->assertFalse($index->aliasExists());
+        $this->assertFalse($index->hasAlias());
 
         $this->assertTrue($index->syncMapping());
 
         $this->assertTrue($index->exists());
-        $this->assertTrue($index->aliasExists());
+        $this->assertTrue($index->hasAlias());
+    }
+
+    public function test_sync_mapping_with_mapping()
+    {
+        $restaurant = factory(Restaurant::class)->create();
+        $index = $restaurant->getIndex();
+
+        $this->assertFalse($index->exists());
+        $this->assertFalse($index->hasAlias());
+
+        $this->assertTrue($index->syncMapping());
+
+        $this->assertTrue($index->exists());
+        $this->assertTrue($index->hasAlias());
     }
 }

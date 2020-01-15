@@ -12,13 +12,8 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 use InvalidArgumentException;
 use Laravel\Scout\EngineManager;
-use Rennokki\ElasticScout\Console\CreateIndexCommand;
-use Rennokki\ElasticScout\Console\DropIndexCommand;
-use Rennokki\ElasticScout\Console\MakeIndexCommand;
-use Rennokki\ElasticScout\Console\MakeRuleCommand;
-use Rennokki\ElasticScout\Console\MigrateCommand;
-use Rennokki\ElasticScout\Console\UpdateIndexCommand;
-use Rennokki\ElasticScout\Console\UpdateMappingCommand;
+use Rennokki\ElasticScout\Console\DeleteIndexCommand;
+use Rennokki\ElasticScout\Console\SyncIndexCommand;
 
 class ElasticScoutServiceProvider extends ServiceProvider
 {
@@ -34,14 +29,8 @@ class ElasticScoutServiceProvider extends ServiceProvider
         ]);
 
         $this->commands([
-            MakeIndexCommand::class,
-            MakeRuleCommand::class,
-
-            CreateIndexCommand::class,
-            UpdateIndexCommand::class,
-            DropIndexCommand::class,
-            UpdateMappingCommand::class,
-            MigrateCommand::class,
+            SyncIndexCommand::class,
+            DeleteIndexCommand::class,
         ]);
 
         $this
