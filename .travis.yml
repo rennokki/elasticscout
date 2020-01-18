@@ -9,7 +9,7 @@ php:
 
 env:
   global:
-    - ES_VERSION="7.1.1"
+    - ES_VERSION="7.2.1"
 
 cache:
   directories:
